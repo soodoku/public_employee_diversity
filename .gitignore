@@ -1,4 +1,5 @@
 .*
+.DS_Store
 !.gitignore
 !.gitattributes
 !.travis.yml
