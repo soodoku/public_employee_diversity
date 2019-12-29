@@ -10,4 +10,7 @@ output.csv
 ./data
 build/
 ethnicolr.egg-info/
-ethnicolr/data/fl_voter_reg/
+ethnicolr/data/fl_v.DS_Store
+*.csv
+*.tar.gz
+.ipynb_checkpoints
