@@ -1,0 +1,144 @@
+\newcommand{\style}{draft}
+
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\topmargin}{0.0in}
+\setlength{\headheight}{0.0in}
+\setlength{\headsep}{0.0in}
+
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+
+\newlength{\standardbaselineskip}
+\setlength{\standardbaselineskip}{\baselineskip}
+
+\newlength{\defaultbaselineskip}
+\setlength{\defaultbaselineskip}{1.5\baselineskip}
+
+\renewcommand{\baselinestretch}{1.5}
+
+\newlength{\standardtabcolsep}
+\setlength{\standardtabcolsep}{\tabcolsep}
+
+\tolerance=500
+
+\newcounter{fig}
+\newcounter{tab}
+%\renewcommand{\thetab}{\Roman{tab}}
+
+\newcommand{\floatcaptionsize}{footnotesize}
+
+\newenvironment{floatcaptionbox}[3]%
+  {\renewcommand{\floatcaptionsize}{#2} \par \noindent%
+  \begin{\floatcaptionsize} \begin{minipage}{#1\textwidth}%
+  \setlength{\baselineskip}{#3\standardbaselineskip}}%
+  {\end{minipage} \end{\floatcaptionsize} \par}
+
+% floatcaptionbox arguments:
+  % argument #1 = width, a decimal number such as 0.9.
+  % argument #2 = size, footnotesize, scriptsize, normalsize, etc.
+  % argument #3 = line spacing, a decimal number such as 1.0.
+
+\newenvironment{singlespace}%
+  {\par \vspace{0.5\standardbaselineskip}%
+  \setlength{\baselineskip}{\standardbaselineskip}}{\par}
+
+\newenvironment{computercode}%
+  {\par \begin{small} \setlength{\baselineskip}{2.2ex} }{\end{small}}
+
+\newtheorem{THEOREM}{THEOREM}
+\newenvironment{theorem}%
+  {\par \begin{THEOREM} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{THEOREM} \par}
+
+\newtheorem{COROLLARY}{COROLLARY}
+\newenvironment{corollary}%
+  {\par \begin{COROLLARY} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{COROLLARY} \par}
+
+\newtheorem{LEMMA}{LEMMA}
+\newenvironment{lemma}%
+  {\par \begin{LEMMA} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{LEMMA} \par}
+
+\newtheorem{DEFINITION}{DEFINITION}
+\newenvironment{definition}%
+  {\par \begin{DEFINITION} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{DEFINITION} \par}
+
+\newtheorem{SETUP}{SETUP}
+\newenvironment{setup}%
+  {\par \begin{SETUP} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{SETUP} \par}
+
+\newtheorem{PROPOSITION}{PROPOSITION}
+\newenvironment{proposition}%
+  {\par \begin{PROPOSITION} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{PROPOSITION} \par}
+
+\newtheorem{EXAMPLE}{EXAMPLE}
+\newenvironment{example}%
+  {\par \begin{EXAMPLE} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\nolinebreak \hfill $\Box$ \end{rm} \end{EXAMPLE} \par}
+
+\newtheorem{REMARK}{REMARK}
+\newenvironment{remark}%
+  {\par \begin{REMARK} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\nolinebreak \hfill $\Box$ \end{rm} \end{REMARK} \par}
+
+\newtheorem{ASSUMPTION}{ASSUMPTION}
+\newenvironment{assumption}%
+  {\par \begin{ASSUMPTION} \setlength{\baselineskip}{\defaultbaselineskip}%
+  \begin{rm}}{\end{rm} \end{ASSUMPTION} \par}
+
+\newenvironment{proof}%
+  {\par \noindent \setlength{\baselineskip}{\defaultbaselineskip}%
+  {\bf Proof}}{\nolinebreak \hfill $\Box$ \par}
+
+
+%----------- Examples of the use of these environments --------------%
+%                                                                    %
+%  \begin{computercode}                                              %
+%  \begin{verbatim}                                                  %
+%  The computer code goes here.                                      %
+%  \end{verbatim}                                                    %
+%  \end{computercode}                                                %
+%                                                                    %
+%                                                                    %
+%  \begin{theorem}                                                   %
+%  \label{t:slln}                                                    %
+%  The theorem goes here.                                            %
+%  \end{theorem}                                                     %
+%                                                                    %
+%  By Theorem~\ref{t:slln} it follows that ...                       %
+%                                                                    %
+%                                                                    %
+%  \begin{proof}                                                     %
+%  \label{t:slln}                                                    %
+%  The proof goes here. \rule{2mm}{2mm}                              %
+%  \end{proof}                                                       %
+%                                                                    %
+%--------------------------------------------------------------------%
+
+\newlength{\argminheight}
+\newlength{\argminwidth}
+\newcommand{\argmin}[1]{%
+  \settowidth{\argminwidth}{argmin}
+  \settoheight{\argminheight}{\ensuremath{{#1}}}%
+  \addtolength{\argminheight}{0.5ex}%
+  \raisebox{-\argminheight}[0pt][\argminheight]%
+    {\makebox[0pt][l]{\makebox[\argminwidth]{\ensuremath{\scriptstyle{#1}}}}}%
+  \mbox{argmin}}
+
+\newlength{\argmaxheight}
+\newlength{\argmaxwidth}
+\newcommand{\argmax}[1]{%
+  \settowidth{\argmaxwidth}{argmax}
+  \settoheight{\argmaxheight}{\ensuremath{{#1}}}%
+  \addtolength{\argmaxheight}{0.5ex}%
+  \raisebox{-\argmaxheight}[0pt][\argmaxheight]%
+    {\makebox[0pt][l]{\makebox[\argmaxwidth]{\ensuremath{\scriptstyle{#1}}}}}%
+  \mbox{argmax}}
+
+\newcommand{\Var}{\ensuremath{\mbox{Var}}}
+\newcommand{\Cov}{\ensuremath{\mbox{Cov}}}
