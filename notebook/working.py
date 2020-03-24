@@ -564,4 +564,140 @@ plt.suptitle('Log Difference of Avg Salary by Institution')
 plt.tight_layout()
 ##############################################################
 
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
+root = '/Users/seunglee/Downloads/project/'
+df_description = pd.read_csv(root+'employee_race/data/florida_stats.csv')
+
+df_all = df_description.drop_duplicates(['gov', 'race', 'model'])
+df_all_gb = df_all.groupby(['gov', 'race']).mean()[['race_composition',
+                          'race_composition_uniq']].reset_index()
+asian = df_all_gb.loc[df_all_gb.race=='asian'].sort_values(by='gov')
+hispanic = df_all_gb.loc[df_all_gb.race=='hispanic'].sort_values(by='gov')
+black = df_all_gb.loc[df_all_gb.race=='black'].sort_values(by='gov')
+white = df_all_gb.loc[df_all_gb.race=='white'].sort_values(by='gov')
+x = np.arange(5)  
+width = 0.35 
+margin = 0.05
+width = (1.-2.*margin)/4
+
+state_white_nonhispanic = .535
+state_white = .773
+state_black = .169
+state_asian = .03
+state_hispanic = .261
+
+
+import warnings
+warnings.filterwarnings('ignore')
+
+
+plt.close('all')
+# Race Proportion
+##############################################################
+fig, ax = plt.subplots(figsize=(10, 8))    
+asian1 = ax.bar(x - 5*width/5, asian.race_composition, width, color='cyan', alpha=.5)
+black1 = ax.bar(x - 0*width/5, black.race_composition, width, color='orange', alpha=.5)
+hispanic1 = ax.bar(x + 5*width/5, hispanic.race_composition, width, color='green', alpha=.5)
+ax2 = ax.twinx()
+white1 = ax2.bar(x + 10*width/5, white.race_composition, width, color='magenta', alpha=.5)
+spacing = .185
+ax.axhline(y=state_asian, xmin=0.045, xmax=0.085, color='red')
+ax.axhline(y=state_asian, xmin=0.045+spacing, xmax=0.085+spacing, color='red')
+ax.axhline(y=state_asian, xmin=0.045+spacing*2, xmax=0.085+spacing*2, color='red')
+ax.axhline(y=state_asian, xmin=0.045+spacing*3, xmax=0.085+spacing*3, color='red')
+ax.axhline(y=state_asian, xmin=0.045+spacing*4, xmax=0.085+spacing*4, color='red')
+
+ax.axvline(x=-.225, ymin=0.005584066071759335, ymax=.1, color='red')
+ax.axvline(x=.75, ymin=0.03, ymax=.1, color='red')
+ax.axvline(x=1.75, ymin=0.02, ymax=.1, color='red')
+ax.axvline(x=2.75, ymin=0.03, ymax=.1, color='red')
+ax.axvline(x=3.75, ymin=0.1, ymax=.19, color='red')
+
+race_space = .04
+ax.axhline(y=state_black, xmin=0.045+race_space, xmax=0.085+race_space, color='red')
+ax.axhline(y=state_black, xmin=0.045+race_space+spacing, xmax=0.085+spacing+race_space, color='red')
+ax.axhline(y=state_black, xmin=0.045+race_space+spacing*2, xmax=0.085+spacing*2+race_space, color='red')
+ax.axhline(y=state_black, xmin=0.045+race_space+spacing*3, xmax=0.085+spacing*3+race_space, color='red')
+ax.axhline(y=state_black, xmin=0.045++race_space+spacing*4, xmax=0.085+spacing*4+race_space, color='red')
+
+race_space = .08
+ax.axhline(y=state_hispanic, xmin=0.045+race_space, xmax=0.085+race_space, color='red')
+ax.axhline(y=state_hispanic, xmin=0.045+race_space+spacing, xmax=0.085+spacing+race_space, color='red')
+ax.axhline(y=state_hispanic, xmin=0.045+race_space+spacing*2, xmax=0.085+spacing*2+race_space, color='red')
+ax.axhline(y=state_hispanic, xmin=0.045+race_space+spacing*3, xmax=0.085+spacing*3+race_space, color='red')
+ax.axhline(y=state_hispanic, xmin=0.045++race_space+spacing*4, xmax=0.085+spacing*4+race_space, color='red')
+ax.axhline(y=state_hispanic, xmin=0.045++race_space+spacing*4, xmax=0.085+spacing*4+race_space, color='red')
+
+race_space = .127
+ax2.axhline(y=state_white_nonhispanic, xmin=0.045+race_space, xmax=0.085+race_space, color='blue')
+ax2.axhline(y=state_white_nonhispanic, xmin=0.045+race_space+spacing, xmax=0.085+spacing+race_space, color='blue')
+ax2.axhline(y=state_white_nonhispanic, xmin=0.045+race_space+spacing*2, xmax=0.085+spacing*2+race_space, color='blue')
+ax2.axhline(y=state_white_nonhispanic, xmin=0.045+race_space+spacing*3, xmax=0.085+spacing*3+race_space, color='blue')
+ax2.axhline(y=state_white_nonhispanic, xmin=0.045++race_space+spacing*4, xmax=0.085+spacing*4+race_space, color='blue')
+ax2.axhline(y=state_white_nonhispanic, xmin=0.045++race_space+spacing*4, xmax=0.085+spacing*4+race_space, color='blue')
+
+ax.set_ylabel('non white ratio proportion')
+ax.set_ylim([0, .3])
+ax.set_title('Race composition by insitituion')
+ax.set_xticks(x)
+ax.set_xticklabels(asian.gov)
+ax2.set_ylabel('white ratio proportion')
+plt.legend([asian1, black1, hispanic1, white1],['asian', 'black', 'hispanic', 'white'])
+plt.show()
+#plt.suptitle('Race Composition by Instituion (Mean of 4 race models)')
+##############################################################
+asian1.get_height()
+
+for rect in asian1:
+    height = rect.get_height()
+    width = rect.get_width()
+    xy = rect.get_xy()
+    x = rect.get_x()
+    y = rect.get_y()
+    print(height)
+    print(width)
+    print(xy)
+    print(x)
+    print(y)
+    
+    
+height = rect.get_height()
+        ax.annotate('{}'.format(height),
+                    xy=(rect.get_x() + rect.get_width() / 2, height),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha='center', va='bottom')
+
+import seaborn as sns
+df_all_gb.rename(columns={'gov':'institution'}, inplace=True)
+
+
+
+
+
+plt.close('all')
+g = sns.FacetGrid(df_all_gb.loc[df_all_gb.race!='all'], row="race",  hue="institution", margin_titles=True, aspect=2)
+g = (g.map(plt.scatter,  "race_composition","institution", edgecolor="w"))
+g = g.set(xticks = [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1.0])
+#g.set(xticks=df.a[2::8])
+
+statemeans = [.03,.169,.256,.535]
+race = ['Asian', 'Black', 'Hispanic', 'White']
+for i, a in enumerate(g.axes):
+    a[0].grid()
+    a[0].axvline(statemeans[i], ls='--', color='red')
+    a[0].text(statemeans[i],1, "State Mean "+str(statemeans[i]), fontsize=7)
+
+    
+plt.subplots_adjust(top=0.9)
+g.fig.suptitle('Race Composition by Institution') 
+plt.gcf().subplots_adjust(bottom=0.15)
+plt.savefig(root+'temp.png')
+
+
+
+ax1.text(0.5,25, "Some text")
+ax2.text(0.5,25, "Some text")
